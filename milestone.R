@@ -107,7 +107,7 @@ dcmt_samp_bigm_sp_cnt %>%
   facet_wrap(~category, scales = "free")
 
 
-# bi-grams -----------------------------------------------------------------
+# tri-grams -----------------------------------------------------------------
 
 dcmt_samp_trgm <- dcmt_samp %>% 
   group_by(category) %>% 

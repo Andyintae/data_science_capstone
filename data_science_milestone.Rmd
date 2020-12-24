@@ -2,7 +2,8 @@
 title: 'Data science milestone project'
 subtitle : 'Exploratory Data Analysis'
 author: "Andyintae"
-date: '2020 12 22 '
+date: '2020 12 23
+'
 output: html_document
 ---
 
@@ -84,7 +85,15 @@ Let's make sample date set.
 ```{r}
 set.seed(1222)
 dcmt_samp <- dcmt %>% group_by(category) %>% 
-  sample_frac(size = .6, replace = FALSE)
+  sample_frac(size = .1, replace = FALSE)
+```
+
+```{r include=FALSE}
+rm(en_blog)
+rm(en_news)
+rm(en_twit)
+rm(dcmt)
+gc()
 ```
 
 Count words  
@@ -104,6 +113,9 @@ dcmt_samp_wd <- dcmt_samp %>%
   count(category, word, sort = TRUE) %>% 
   mutate(word2 = fct_reorder(word, n))
 dcmt_samp_wd %>% top_n(10)
+```
+```{r include=FALSE}
+gc()
 ```
 
 
@@ -133,7 +145,9 @@ dcmt_samp_bigm_sp_cnt <- dcmt_samp_bigm_sp %>%
 
 dcmt_samp_bigm_sp_cnt %>% top_n(10)
 ```
-
+```{r include=FALSE}
+gc()
+```
 
 # Tri-gram  
 
@@ -162,7 +176,9 @@ dcmt_samp_trgm_sp_cnt <- dcmt_samp_trgm_sp %>%
   count(trgram, sort = TRUE) %>% 
   mutate(trgram2 = fct_reorder(trgram, n))
 ```
-
+```{r include=FALSE}
+gc()
+```
 
 
 ## Plot and Report  
@@ -209,7 +225,7 @@ dcmt_samp_trgm_sp_cnt %>%
   geom_col(show.legend = FALSE)+
   coord_flip()+
   labs(title = " Top 10 Tri-grams", x = "Tri-gram", y = "Count")+
-  facet_wrap(category, scales = "free")
+  facet_wrap(~category, scales = "free")
 ```
 
 There are many times in news.  
